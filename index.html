@@ -5,72 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webster Noble</title>
   <style>
-    :root {
-      --bg-color: #fff;
-      --text-color: #1a1a1a;
-      --accent-color: #2563eb;
-      --card-bg: #fff;
-      --card-border: #e5e5e5;
-      --section-bg-alt: #f9f9f9;
-    }
-    [data-theme='dark'] {
-      --bg-color: #1a1a1a;
-      --text-color: #f0f0f0;
-      --accent-color: #3b82f6;
-      --card-bg: #2a2a2a;
-      --card-border: #3a3a3a;
-      --section-bg-alt: #222;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
       transition: background 0.3s, color 0.3s;
     }
+
+    /* Light Mode */
+    body.light {
+      background: #ffffff;
+      color: #1a1a1a;
+    }
+    body.light header, body.light footer {
+      border-color: #e5e5e5;
+    }
+    body.light .blog-card {
+      background: #ffffff;
+      border-color: #e5e5e5;
+    }
+    body.light .section-alt {
+      background: #f9f9f9;
+    }
+    body.light .button {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    /* Dark Mode */
+    body.dark {
+      background: #1a1a1a;
+      color: #f0f0f0;
+    }
+    body.dark header, body.dark footer {
+      border-color: #3a3a3a;
+    }
+    body.dark .blog-card {
+      background: #2a2a2a;
+      border-color: #3a3a3a;
+    }
+    body.dark .section-alt {
+      background: #222;
+    }
+    body.dark .button {
+      background: #3b82f6;
+      color: #fff;
+    }
+
     header, footer {
       padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid;
     }
     footer {
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid;
+      border-bottom: none;
       text-align: center;
-      color: var(--text-color);
       font-size: 0.9rem;
     }
     nav a {
       margin-left: 1.5rem;
       text-decoration: none;
-      color: var(--text-color);
+      color: inherit;
     }
     nav a:hover {
-      color: #888;
+      opacity: 0.7;
+    }
+    .theme-toggle {
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid;
+      background: none;
+      color: inherit;
     }
     section {
       padding: 4rem 2rem;
       text-align: center;
     }
     h1, h2, h3 { margin-bottom: 1rem; }
-    p {
-      max-width: 700px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.6;
-      color: var(--text-color);
-    }
+    p { max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6; }
     .button {
       display: inline-block;
       padding: 0.75rem 1.5rem;
-      background: var(--accent-color);
-      color: #fff;
       border-radius: 12px;
       text-decoration: none;
       transition: background 0.2s;
     }
-    .button:hover { background: #1d4ed8; }
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -78,31 +100,18 @@
       margin-top: 2rem;
     }
     .blog-card {
-      border: 1px solid var(--card-border);
+      border: 1px solid;
       border-radius: 12px;
       padding: 1.5rem;
       text-align: left;
-      background: var(--card-bg);
       transition: box-shadow 0.2s, background 0.3s;
     }
     .blog-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .blog-card h3 { margin-top: 0; }
-    .blog-card a { color: var(--accent-color); text-decoration: none; }
+    .blog-card a { text-decoration: none; color: inherit; }
     .blog-card a:hover { text-decoration: underline; }
-    .theme-toggle {
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      background: none;
-      cursor: pointer;
-      color: var(--text-color);
-      transition: background 0.3s, color 0.3s;
-    }
-    .theme-toggle:hover { background: var(--section-bg-alt); }
   </style>
 </head>
-<body data-theme="light">
-  <!-- Header -->
+<body class="light">
   <header>
     <h1>Webster Noble</h1>
     <nav>
@@ -113,15 +122,13 @@
     </nav>
   </header>
 
-  <!-- Home Section -->
   <section id="home">
     <h2>Hi, I'm Webster Noble</h2>
     <p>A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.</p>
     <a href="#blog" class="button">Explore My Blog</a>
   </section>
 
-  <!-- Blog Section -->
-  <section id="blog" style="background:var(--section-bg-alt);">
+  <section id="blog" class="section-alt">
     <h2>Blog</h2>
     <div class="blog-grid">
       <div class="blog-card">
@@ -142,13 +149,11 @@
     </div>
   </section>
 
-  <!-- About Section -->
   <section id="about">
     <h2>About Me</h2>
     <p>I'm Webster Noble, a lifelong learner who enjoys blending technology and creativity to bring ideas to life. Whether it's experimenting with new tools, writing about tech and design, or simply sharing stories, I'm always exploring ways to connect and grow.</p>
   </section>
 
-  <!-- Footer -->
   <footer>
     © <span id="year"></span> Webster Noble. All rights reserved.
   </footer>
@@ -156,10 +161,9 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     function toggleTheme() {
-      const body = document.body;
-      body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
     }
   </script>
 </body>
 </html>
-
