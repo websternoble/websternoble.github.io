@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webster Noble</title>
   <style>
+    /* Base Styles */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       transition: background 0.5s, color 0.5s;
+      background-color: rgba(215, 215, 215, 1);
+      overflow: hidden;
     }
 
     /* Light Mode */
@@ -16,58 +19,22 @@
       background: #ffffff;
       color: #1a1a1a;
     }
-    body.light header, body.light footer {
-      border-color: #e5e5e5;
-    }
-    body.light .blog-card {
-      background: #ffffff;
-      border-color: #e5e5e5;
-    }
-    body.light .section-alt {
-      background: #f9f9f9;
-    }
-    body.light .button {
-      background: #2563eb;
-      color: #fff;
-    }
 
     /* Dark Mode */
     body.dark {
       background: #1a1a1a;
       color: #f0f0f0;
     }
-    body.dark header, body.dark footer {
-      border-color: #3a3a3a;
-    }
-    body.dark .blog-card {
-      background: #2a2a2a;
-      border-color: #3a3a3a;
-    }
-    body.dark .section-alt {
-      background: #222;
-    }
-    body.dark .button {
-      background: #3b82f6;
-      color: #fff;
-    }
 
-    header, footer {
+    header {
       padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid;
-      transition: border-color 0.5s;
-    }
-    footer {
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-top: 1px solid;
-      border-bottom: none;
-      text-align: center;
-      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 2;
+      background: transparent; /* Ensure the background pattern is visible */
     }
 
     nav {
@@ -77,157 +44,149 @@
     }
 
     /* Liquid Glass Buttons */
-    nav a, .theme-toggle {
-      text-decoration: none;
-      color: inherit;
-      font-size: 1rem;
+    .button-wrap {
+      position: relative;
+      z-index: 2;
+      border-radius: 999vw;
+      background: transparent;
+      pointer-events: auto; /* Allow interaction with the buttons */
+      transition: all 400ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .button-shadow {
+      --shadow-cuttoff-fix: 2em;
+      position: absolute;
+      width: calc(100% + var(--shadow-cuttoff-fix));
+      height: calc(100% + var(--shadow-cuttoff-fix));
+      top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+      filter: blur(clamp(2px, 0.125em, 12px));
+      pointer-events: none;
+    }
+
+    .button-shadow::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      border-radius: 999vw;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+      width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+      top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+      left: calc(var(--shadow-cuttoff-fix) - 0.875em);
+      padding: 0.125em;
+      box-sizing: border-box;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+      transition: all 400ms cubic-bezier(0.25, 1, 0.5, 1);
+      opacity: 1;
+    }
+
+    button {
+      all: unset;
+      cursor: pointer;
+      position: relative;
+      z-index: 3;
+      background: linear-gradient(
+        -75deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.05)
+      );
+      border-radius: 999vw;
+      box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+        0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.2),
+        0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+        0 0 0 0 rgba(255, 255, 255, 1);
+      backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+      transition: all 400ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    button:hover {
+      transform: scale(0.975);
+      backdrop-filter: blur(0.01em);
+      box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+        inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+        0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
+        0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.5),
+        0 0 0 0 rgba(255, 255, 255, 1);
+    }
+
+    button span {
+      position: relative;
+      display: block;
+      user-select: none;
+      font-family: "Inter", sans-serif;
+      letter-spacing: -0.05em;
       font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+      font-size: 1em;
+      color: rgba(50, 50, 50, 1);
+      text-shadow: 0em 0.25em 0.05em rgba(0, 0, 0, 0.1);
+      padding-inline: 1.5em;
+      padding-block: 0.875em;
     }
 
-    nav a:hover, .theme-toggle:hover {
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      transform: translateY(-2px);
-    }
-
-    body.dark nav a, body.dark .theme-toggle {
-      background: rgba(30, 30, 30, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    body.dark nav a:hover, body.dark .theme-toggle:hover {
-      background: rgba(30, 30, 30, 0.6);
-    }
-
-    .theme-icon {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-
-    section {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    h1, h2, h3 { margin-bottom: 1rem; }
-    p { max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6; }
-
-    .button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .blog-card {
-      border: 1px solid;
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: left;
-      transition: box-shadow 0.2s, background 0.5s, border-color 0.5s;
-    }
-
-    .blog-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .blog-card a { text-decoration: none; color: inherit; }
-    .blog-card a:hover { text-decoration: underline; }
-
-    .theme-button-container {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
+    /* Background Pattern */
+    svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
   </style>
 </head>
 <body class="light">
+  <!-- Background Pattern -->
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dottedGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1" fill="rgba(0,0,0,0.15)" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#dottedGrid)" />
+  </svg>
+
   <header>
     <h1>Webster Noble</h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#blog">Blog</a>
-      <a href="#about">About</a>
-      <button class="theme-toggle" onclick="toggleTheme()">
-        <svg class="theme-icon" id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none" />
-          <path stroke="currentColor" stroke-width="2" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-        <svg class="theme-icon" id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
-          <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
-        </svg>
-        Theme
-      </button>
+      <div class="button-wrap">
+        <button aria-label="Go to Home"><span>Home</span></button>
+        <div class="button-shadow"></div>
+      </div>
+      <div class="button-wrap">
+        <button aria-label="Go to Blog"><span>Blog</span></button>
+        <div class="button-shadow"></div>
+      </div>
+      <div class="button-wrap">
+        <button aria-label="Go to About"><span>About</span></button>
+        <div class="button-shadow"></div>
+      </div>
+      <div class="button-wrap">
+        <button aria-label="Toggle Theme" onclick="toggleTheme()">
+          <span>Theme</span>
+        </button>
+        <div class="button-shadow"></div>
+      </div>
     </nav>
   </header>
 
   <section id="home">
     <h2>Hi, I'm Webster Noble</h2>
-    <p>A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.</p>
-    <div class="theme-button-container">
-      <a href="#blog" class="button">Explore My Blog</a>
-    </div>
-  </section>
-
-  <section id="blog" class="section-alt">
-    <h2>Blog</h2>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <h3>Blog Post 1</h3>
-        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
-        <a href="#">Read more →</a>
-      </div>
-      <div class="blog-card">
-        <h3>Blog Post 2</h3>
-        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
-        <a href="#">Read more →</a>
-      </div>
-      <div class="blog-card">
-        <h3>Blog Post 3</h3>
-        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
-        <a href="#">Read more →</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I'm Webster Noble, a lifelong learner who enjoys blending technology and creativity to bring ideas to life. Whether it's experimenting with new tools, writing about tech and design, or simply sharing stories, I'm always exploring ways to connect and grow.</p>
+    <p>A curious mind passionate about technology, creativity, and building meaningful projects.</p>
   </section>
 
   <footer>
-    ©&nbsp;<span id="year"></span> &nbsp;Webster Noble. All rights reserved.
+    © <span id="year"></span> Webster Noble. All rights reserved.
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     function toggleTheme() {
       const body = document.body;
-      const sun = document.getElementById('icon-sun');
-      const moon = document.getElementById('icon-moon');
-      body.classList.toggle('dark');
-      body.classList.toggle('light');
-      if(body.classList.contains('dark')) {
-        sun.style.display = 'none';
-        moon.style.display = 'inline';
-      } else {
-        sun.style.display = 'inline';
-        moon.style.display = 'none';
-      }
+      body.classList.toggle("dark");
+      body.classList.toggle("light");
     }
   </script>
 </body>
