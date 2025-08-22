@@ -6,188 +6,176 @@
   <title>Webster Noble</title>
   <style>
     :root {
+      --glass-light: rgba(255,255,255,0.65);
+      --glass-dark: rgba(30,30,30,0.45);
+      --glass-border-light: rgba(255,255,255,0.6);
+      --glass-border-dark: rgba(255,255,255,0.06);
       --accent: #3b82f6;
-      --light-bg: #ffffff;
-      --light-bg-alt: #f5f5f7;
-      --light-text: #111827;
-      --dark-bg: #0b0f14;
-      --dark-bg-alt: #0f1724;
-      --dark-text: #e6eef8;
-      --glass-light: rgba(255, 255, 255, 0.65);
-      --glass-dark: rgba(30, 30, 30, 0.45);
+      --muted: rgba(0,0,0,0.06);
     }
 
-    /* Base styles */
+    /* Base */
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      transition: background 0.3s, color 0.3s;
-      background: var(--light-bg);
-      color: var(--light-text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      transition: background 0.5s, color 0.5s;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(250,250,252,0.48) 28%);
+      color: #111827;
     }
 
-    body.dark {
-      background: var(--dark-bg);
-      color: var(--dark-text);
-    }
-
+    /* Header layout */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2rem;
-      background: var(--glass-light);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.5));
       border-radius: 12px;
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      backdrop-filter: blur(12px) saturate(140%);
       box-shadow: 0 6px 24px rgba(16, 24, 40, 0.08);
-      transition: background 0.3s;
     }
 
-    body.dark header {
-      background: var(--glass-dark);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    nav {
+    /* Navigation buttons */
+    .nav-buttons {
       display: flex;
       gap: 1rem;
     }
 
-    .nav-link {
-      text-decoration: none;
-      color: inherit;
-      font-weight: 500;
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: background 0.3s, color 0.3s;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
+      backdrop-filter: blur(8px) saturate(120%);
+      box-shadow: 0 8px 20px rgba(16, 24, 40, 0.06);
+      transition: transform 0.12s, box-shadow 0.18s, background 0.2s;
     }
 
-    .nav-link:hover {
-      background: rgba(0, 0, 0, 0.05);
+    .nav-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(16, 24, 40, 0.08);
     }
 
-    body.dark .nav-link:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
+    /* Theme toggle button */
     .theme-toggle {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 1rem;
       border-radius: 999px;
-      border: 1px solid transparent;
-      background: var(--glass-light);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
+      backdrop-filter: blur(8px) saturate(120%);
+      box-shadow: 0 8px 20px rgba(16, 24, 40, 0.06);
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.12s, box-shadow 0.18s, background 0.2s;
     }
 
     .theme-toggle:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(16, 24, 40, 0.08);
     }
 
-    body.dark .theme-toggle {
-      background: var(--glass-dark);
-    }
+    /* Responsive behavior */
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
 
-    main {
-      padding: 2rem;
-      text-align: center;
-    }
-
-    section {
-      margin-bottom: 2rem;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #fff;
-      background: var(--accent);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-
-    .button:hover {
-      background: #2563eb;
-      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
-    }
-
-    footer {
-      padding: 1rem;
-      text-align: center;
-      background: var(--glass-light);
-      border-radius: 12px;
-      margin: 2rem auto 0;
-      max-width: 800px;
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 6px 24px rgba(16, 24, 40, 0.08);
-      transition: background 0.3s;
-    }
-
-    body.dark footer {
-      background: var(--glass-dark);
+      .nav-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   </style>
 </head>
-<body class="light">
+<body class="light glass">
   <header>
     <h1>Webster Noble</h1>
     <nav>
-      <a href="#home" class="nav-link">Home</a>
-      <a href="#blog" class="nav-link">Blog</a>
-      <a href="#about" class="nav-link">About</a>
+      <div class="nav-buttons">
+        <a class="nav-button" href="#home">Home</a>
+        <a class="nav-button" href="#blog">Blog</a>
+        <a class="nav-button" href="#about">About</a>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <svg class="theme-icon" id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none" />
+          <path stroke="currentColor" stroke-width="2" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="theme-icon" id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
+          <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+        </svg>
+        Toggle Theme
+      </button>
     </nav>
-    <button class="theme-toggle" onclick="toggleTheme()">
-      <span id="theme-icon">☀️</span> Toggle Theme
-    </button>
   </header>
 
-  <main>
-    <section id="home">
-      <h2>Welcome to Webster Noble</h2>
-      <p>Your go-to place for technology, creativity, and meaningful projects.</p>
-      <a href="#blog" class="button">Explore Blog</a>
-    </section>
+  <section id="home">
+    <h2>Hi, I'm Webster Noble</h2>
+    <p>A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.</p>
+    <div class="theme-button-container">
+      <a href="#blog" class="button">Explore My Blog</a>
+    </div>
+  </section>
 
-    <section id="blog">
-      <h2>Blog</h2>
-      <p>Discover articles, tutorials, and insights on technology and design.</p>
-    </section>
+  <section id="blog" class="section-alt glass">
+    <h2>Blog</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <h3>Blog Post 1</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+      <div class="blog-card">
+        <h3>Blog Post 2</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+      <div class="blog-card">
+        <h3>Blog Post 3</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+    </div>
+  </section>
 
-    <section id="about">
-      <h2>About Me</h2>
-      <p>I'm Webster Noble, a curious mind passionate about blending technology and creativity.</p>
-    </section>
-  </main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm Webster Noble, a lifelong learner who enjoys blending technology and creativity to bring ideas to life. Whether it's experimenting with new tools, writing about tech and design, or simply sharing stories, I'm always exploring ways to connect and grow.</p>
+  </section>
 
-  <footer>
-    <p>© <span id="year"></span> Webster Noble. All rights reserved.</p>
+  <footer class="glass">
+    © <span id="year"></span> Webster Noble. All rights reserved.
   </footer>
 
   <script>
-    // Set the current year in the footer
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Theme toggle functionality
     function toggleTheme() {
       const body = document.body;
-      const themeIcon = document.getElementById("theme-icon");
-      body.classList.toggle("dark");
-      if (body.classList.contains("dark")) {
-        themeIcon.textContent = "🌙";
+      const sun = document.getElementById('icon-sun');
+      const moon = document.getElementById('icon-moon');
+      body.classList.toggle('dark');
+      body.classList.toggle('light');
+      if (body.classList.contains('dark')) {
+        sun.style.display = 'none';
+        moon.style.display = 'inline';
       } else {
-        themeIcon.textContent = "☀️";
+        sun.style.display = 'inline';
+        moon.style.display = 'none';
       }
     }
   </script>
