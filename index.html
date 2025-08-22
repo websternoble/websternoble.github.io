@@ -11,7 +11,7 @@
       font-family: Arial, sans-serif;
       transition: background 0.5s, color 0.5s;
       background-color: rgba(215, 215, 215, 1);
-      overflow: hidden;
+      overflow-x: hidden; /* Allow vertical scroll, hide horizontal */
     }
 
     /* Light Mode */
@@ -141,10 +141,10 @@
 
     /* Background Pattern */
     svg {
-      position: absolute;
+      position: fixed; /* Keep background fixed during scroll */
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: -1; /* Place background behind all content */
     }
 
     section {
@@ -175,6 +175,15 @@
       padding: 1.5rem 2rem;
       text-align: center;
       border-top: 1px solid rgba(0, 0, 0, 0.1);
+      position: relative; /* Ensure it's in the normal document flow */
+      background: rgba(255, 255, 255, 0.7); /* Add background for legibility */
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    body.dark footer {
+      background: rgba(26, 26, 26, 0.7);
+      border-top-color: rgba(255, 255, 255, 0.1);
     }
   </style>
 </head>
