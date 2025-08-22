@@ -21,8 +21,19 @@
       transition: background 0.5s, color 0.5s;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(250,250,252,0.48) 28%);
+
+      /* Light mode wallpaper with a subtle pattern */
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(240, 240, 255, 0.4), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(240, 240, 255, 0.4), transparent 50%),
+        linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(250,250,252,0.48) 28%);
       color: #111827;
+    }
+
+    /* Dark mode background */
+    body.dark {
+      background: radial-gradient(circle at 10% 10%, #0f1724 0%, #0b0f14 60%);
+      color: #e6eef8;
     }
 
     /* Header layout */
