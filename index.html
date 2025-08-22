@@ -103,20 +103,53 @@
     }
     nav a:hover { opacity: 0.85; transform: translateY(-1px); }
 
-    .theme-toggle {
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      background: linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,255,255,0.06));
-      color: inherit;
+    /* make header/nav layout: title left, nav items + theme toggle in one row with equal spacing */
+    header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: background 0.25s, transform 0.15s, box-shadow 0.25s;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    .theme-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
-    .theme-toggle:active { transform: translateY(0); }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem; /* equal spacing between nav group and theme button */
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.9rem; /* equal spacing between each link */
+      align-items: center;
+    }
+
+    /* shared "liquid glass" button style for nav links and the theme toggle */
+    .nav-button,
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
+      backdrop-filter: blur(8px) saturate(120%);
+      box-shadow: 0 8px 20px rgba(16,24,40,0.06);
+      transition: transform 0.12s, box-shadow 0.18s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-button { color: var(--accent); }
+    .nav-button:hover, .theme-toggle:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(16,24,40,0.08);
+    }
+
+    /* keep the theme toggle pill shape */
+    .theme-toggle { border-radius: 999px; padding: 0.45rem 0.9rem; }
 
     section {
       padding: 4rem 2rem;
@@ -217,9 +250,12 @@
   <header>
     <h1>Webster Noble</h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#blog">Blog</a>
-      <a href="#about">About</a>
+      <div class="nav-buttons">
+        <a class="nav-button" href="#home">Home</a>
+        <a class="nav-button" href="#blog">Blog</a>
+        <a class="nav-button" href="#about">About</a>
+      </div>
+
       <button class="theme-toggle" onclick="toggleTheme()">
         <svg class="theme-icon" id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none" />
