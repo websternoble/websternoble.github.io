@@ -51,6 +51,40 @@
       color: #fff;
     }
 
+    /* Add Liquid Glass Effect */
+    .liquid-glass {
+      background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+      backdrop-filter: blur(10px); /* Frosted glass effect */
+      -webkit-backdrop-filter: blur(10px); /* For Safari support */
+      border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+      border-radius: 12px; /* Rounded corners */
+    }
+
+    /* Apply to header and footer */
+    header, footer {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 0; /* No rounded corners for full-width elements */
+    }
+
+    /* Apply to blog cards */
+    .blog-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Optional: Adjust hover effect for blog cards */
+    .blog-card:hover {
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
     header, footer {
       padding: 1.5rem 2rem;
       display: flex;
