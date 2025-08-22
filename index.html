@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.5s, color 0.5s;
     }
 
     /* Light Mode */
@@ -57,6 +57,7 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid;
+      transition: border-color 0.5s;
     }
     footer {
       border-top: 1px solid;
@@ -68,6 +69,7 @@
       margin-left: 1.5rem;
       text-decoration: none;
       color: inherit;
+      transition: opacity 0.3s;
     }
     nav a:hover {
       opacity: 0.7;
@@ -79,7 +81,12 @@
       border: 1px solid;
       background: none;
       color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
+    .theme-toggle:hover { background: rgba(0,0,0,0.05); }
     section {
       padding: 4rem 2rem;
       text-align: center;
@@ -91,7 +98,7 @@
       padding: 0.75rem 1.5rem;
       border-radius: 12px;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: background 0.3s, color 0.3s;
     }
     .blog-grid {
       display: grid;
@@ -104,11 +111,21 @@
       border-radius: 12px;
       padding: 1.5rem;
       text-align: left;
-      transition: box-shadow 0.2s, background 0.3s;
+      transition: box-shadow 0.2s, background 0.5s, border-color 0.5s;
     }
     .blog-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .blog-card a { text-decoration: none; color: inherit; }
     .blog-card a:hover { text-decoration: underline; }
+    .theme-button-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+    .theme-icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
   </style>
 </head>
 <body class="light">
@@ -118,14 +135,25 @@
       <a href="#home">Home</a>
       <a href="#blog">Blog</a>
       <a href="#about">About</a>
-      <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <svg class="theme-icon" id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none" />
+          <path stroke="currentColor" stroke-width="2" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="theme-icon" id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
+          <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+        </svg>
+        Toggle Theme
+      </button>
     </nav>
   </header>
 
   <section id="home">
     <h2>Hi, I'm Webster Noble</h2>
     <p>A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.</p>
-    <a href="#blog" class="button">Explore My Blog</a>
+    <div class="theme-button-container">
+      <a href="#blog" class="button">Explore My Blog</a>
+    </div>
   </section>
 
   <section id="blog" class="section-alt">
@@ -161,8 +189,18 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     function toggleTheme() {
-      document.body.classList.toggle('dark');
-      document.body.classList.toggle('light');
+      const body = document.body;
+      const sun = document.getElementById('icon-sun');
+      const moon = document.getElementById('icon-moon');
+      body.classList.toggle('dark');
+      body.classList.toggle('light');
+      if(body.classList.contains('dark')) {
+        sun.style.display = 'none';
+        moon.style.display = 'inline';
+      } else {
+        sun.style.display = 'inline';
+        moon.style.display = 'none';
+      }
     }
   </script>
 </body>
