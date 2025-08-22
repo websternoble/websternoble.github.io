@@ -10,19 +10,22 @@
       margin: 0;
       font-family: Arial, sans-serif;
       transition: background 0.5s, color 0.5s;
-      background-color: rgba(215, 215, 215, 1);
+      background-image: url('wallpaper.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       overflow-x: hidden; /* Allow vertical scroll, hide horizontal */
     }
 
     /* Light Mode */
     body.light {
-      background: #ffffff;
+      /* background: #ffffff; */ /* Removed to show wallpaper */
       color: #1a1a1a;
     }
 
     /* Dark Mode */
     body.dark {
-      background: #1a1a1a;
+      /* background: #1a1a1a; */ /* Removed to show wallpaper */
       color: #f0f0f0;
     }
 
@@ -139,13 +142,15 @@
       justify-content: center;
     }
 
-    /* Background Pattern */
+    /* Background Pattern - REMOVED */
+    /* 
     svg {
-      position: fixed; /* Keep background fixed during scroll */
+      position: fixed; 
       width: 100%;
       height: 100%;
-      z-index: -1; /* Place background behind all content */
-    }
+      z-index: -1; 
+    } 
+    */
 
     section {
       padding: 4rem 2rem;
@@ -188,7 +193,8 @@
   </style>
 </head>
 <body class="light">
-  <!-- Background Pattern -->
+  <!-- Background Pattern - REMOVED -->
+  <!-- 
   <svg xmlns="http://www.w3.org/2000/svg">
     <defs>
       <pattern id="dottedGrid" width="30" height="30" patternUnits="userSpaceOnUse">
@@ -196,7 +202,8 @@
       </pattern>
     </defs>
     <rect width="100%" height="100%" fill="url(#dottedGrid)" />
-  </svg>
+  </svg> 
+  -->
 
   <header>
     <h1>Webster Noble</h1>
