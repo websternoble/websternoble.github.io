@@ -22,11 +22,8 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
 
-      /* Light mode wallpaper with a subtle pattern */
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(240, 240, 255, 0.4), transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(240, 240, 255, 0.4), transparent 50%),
-        linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(250,250,252,0.48) 28%);
+      /* Simplified light mode wallpaper */
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(245,245,247,1) 100%);
       color: #111827;
     }
 
@@ -134,44 +131,6 @@
       </button>
     </nav>
   </header>
-
-  <section id="home">
-    <h2>Hi, I'm Webster Noble</h2>
-    <p>A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.</p>
-    <div class="theme-button-container">
-      <a href="#blog" class="button">Explore My Blog</a>
-    </div>
-  </section>
-
-  <section id="blog" class="section-alt glass">
-    <h2>Blog</h2>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <h3>Blog Post 1</h3>
-        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
-        <a href="#">Read more →</a>
-      </div>
-      <div class="blog-card">
-        <h3>Blog Post 2</h3>
-        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
-        <a href="#">Read more →</a>
-      </div>
-      <div class="blog-card">
-        <h3>Blog Post 3</h3>
-        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
-        <a href="#">Read more →</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I'm Webster Noble, a lifelong learner who enjoys blending technology and creativity to bring ideas to life. Whether it's experimenting with new tools, writing about tech and design, or simply sharing stories, I'm always exploring ways to connect and grow.</p>
-  </section>
-
-  <footer class="glass">
-    © <span id="year"></span> Webster Noble. All rights reserved.
-  </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
