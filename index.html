@@ -16,29 +16,68 @@
       background: #ffffff;
       color: #1a1a1a;
     }
+    body.light header, body.light footer {
+      border-color: #e5e5e5;
+    }
+    body.light .blog-card {
+      background: #ffffff;
+      border-color: #e5e5e5;
+    }
+    body.light .section-alt {
+      background: #f9f9f9;
+    }
+    body.light .button {
+      background: #2563eb;
+      color: #fff;
+    }
 
     /* Dark Mode */
     body.dark {
       background: #1a1a1a;
       color: #f0f0f0;
     }
+    body.dark header, body.dark footer {
+      border-color: #3a3a3a;
+    }
+    body.dark .blog-card {
+      background: #2a2a2a;
+      border-color: #3a3a3a;
+    }
+    body.dark .section-alt {
+      background: #222;
+    }
+    body.dark .button {
+      background: #3b82f6;
+      color: #fff;
+    }
 
-    header {
+    header, footer {
       padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid;
+      transition: border-color 0.5s;
+    }
+    footer {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid;
+      border-bottom: none;
+      text-align: center;
+      font-size: 0.9rem;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     /* Liquid Glass Buttons */
-    .nav-link, .theme-toggle {
+    nav a, .theme-toggle {
       text-decoration: none;
       color: inherit;
       font-size: 1rem;
@@ -53,18 +92,18 @@
       transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
     }
 
-    .nav-link:hover, .theme-toggle:hover {
+    nav a:hover, .theme-toggle:hover {
       background: rgba(255, 255, 255, 0.3);
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
       transform: translateY(-2px);
     }
 
-    body.dark .nav-link, body.dark .theme-toggle {
+    body.dark nav a, body.dark .theme-toggle {
       background: rgba(30, 30, 30, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    body.dark .nav-link:hover, body.dark .theme-toggle:hover {
+    body.dark nav a:hover, body.dark .theme-toggle:hover {
       background: rgba(30, 30, 30, 0.6);
     }
 
@@ -79,18 +118,40 @@
       text-align: center;
     }
 
-    footer {
-      padding: 1.5rem 2rem;
-      text-align: center;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    h1, h2, h3 { margin-bottom: 1rem; }
+    p { max-width: 700px; margin: 0 auto 1.5rem; line-height: 1.6; }
+
+    .button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
     }
 
-    /* SVG Filter for Liquid Glass Effect */
-    svg {
-      display: none;
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
-    .liquid-glass {
-      filter: url(#liquid-effect);
+
+    .blog-card {
+      border: 1px solid;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: left;
+      transition: box-shadow 0.2s, background 0.5s, border-color 0.5s;
+    }
+
+    .blog-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .blog-card a { text-decoration: none; color: inherit; }
+    .blog-card a:hover { text-decoration: underline; }
+
+    .theme-button-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
     }
   </style>
 </head>
@@ -98,10 +159,10 @@
   <header>
     <h1>Webster Noble</h1>
     <nav>
-      <a href="#home" class="nav-link liquid-glass">Home</a>
-      <a href="#blog" class="nav-link liquid-glass">Blog</a>
-      <a href="#about" class="nav-link liquid-glass">About</a>
-      <button class="theme-toggle liquid-glass" onclick="toggleTheme()">
+      <a href="#home">Home</a>
+      <a href="#blog">Blog</a>
+      <a href="#about">About</a>
+      <button class="theme-toggle" onclick="toggleTheme()">
         <svg class="theme-icon" id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none" />
           <path stroke="currentColor" stroke-width="2" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -117,19 +178,40 @@
   <section id="home">
     <h2>Hi, I'm Webster Noble</h2>
     <p>A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.</p>
+    <div class="theme-button-container">
+      <a href="#blog" class="button">Explore My Blog</a>
+    </div>
+  </section>
+
+  <section id="blog" class="section-alt">
+    <h2>Blog</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <h3>Blog Post 1</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+      <div class="blog-card">
+        <h3>Blog Post 2</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+      <div class="blog-card">
+        <h3>Blog Post 3</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm Webster Noble, a lifelong learner who enjoys blending technology and creativity to bring ideas to life. Whether it's experimenting with new tools, writing about tech and design, or simply sharing stories, I'm always exploring ways to connect and grow.</p>
   </section>
 
   <footer>
-    © <span id="year"></span> Webster Noble. All rights reserved.
+    ©&nbsp;<span id="year"></span> &nbsp;Webster Noble. All rights reserved.
   </footer>
-
-  <!-- SVG Filter for Liquid Glass Effect -->
-  <svg xmlns="http://www.w3.org/2000/svg">
-    <filter id="liquid-effect">
-      <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="3" result="turbulence" />
-      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-  </svg>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -139,7 +221,7 @@
       const moon = document.getElementById('icon-moon');
       body.classList.toggle('dark');
       body.classList.toggle('light');
-      if (body.classList.contains('dark')) {
+      if(body.classList.contains('dark')) {
         sun.style.display = 'none';
         moon.style.display = 'inline';
       } else {
