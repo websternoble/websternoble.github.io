@@ -65,28 +65,34 @@
       text-align: center;
       font-size: 0.9rem;
     }
-    nav a {
-      margin-left: 1.5rem;
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    nav a, .theme-toggle {
       text-decoration: none;
       color: inherit;
-      transition: opacity 0.3s;
-    }
-    nav a:hover {
-      opacity: 0.7;
-    }
-    .theme-toggle {
+      font-size: 1rem;
+      font-weight: 500;
       padding: 0.5rem 1rem;
       border-radius: 12px;
-      cursor: pointer;
-      border: 1px solid;
-      background: none;
-      color: inherit;
+      transition: background 0.3s, color 0.3s;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
-    .theme-toggle:hover { background: rgba(0,0,0,0.05); }
+    nav a:hover, .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    body.dark nav a:hover, body.dark .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .theme-icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
     section {
       padding: 4rem 2rem;
       text-align: center;
@@ -121,11 +127,6 @@
       display: flex;
       justify-content: center;
     }
-    .theme-icon {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
   </style>
 </head>
 <body class="light">
@@ -143,7 +144,7 @@
         <svg class="theme-icon" id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
           <path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
         </svg>
-        Toggle Theme
+        Theme
       </button>
     </nav>
   </header>
