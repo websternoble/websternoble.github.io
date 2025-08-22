@@ -1,59 +1,165 @@
-import { useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webster Noble</title>
+  <style>
+    :root {
+      --bg-color: #fff;
+      --text-color: #1a1a1a;
+      --accent-color: #2563eb;
+      --card-bg: #fff;
+      --card-border: #e5e5e5;
+      --section-bg-alt: #f9f9f9;
+    }
+    [data-theme='dark'] {
+      --bg-color: #1a1a1a;
+      --text-color: #f0f0f0;
+      --accent-color: #3b82f6;
+      --card-bg: #2a2a2a;
+      --card-border: #3a3a3a;
+      --section-bg-alt: #222;
+    }
 
-export default function App() {
-  const [year] = useState(new Date().getFullYear());
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+    header, footer {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+    }
+    footer {
+      border-top: 1px solid var(--card-border);
+      text-align: center;
+      color: var(--text-color);
+      font-size: 0.9rem;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+    nav a:hover {
+      color: #888;
+    }
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    h1, h2, h3 { margin-bottom: 1rem; }
+    p {
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+    .button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-color);
+      color: #fff;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .button:hover { background: #1d4ed8; }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .blog-card {
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: left;
+      background: var(--card-bg);
+      transition: box-shadow 0.2s, background 0.3s;
+    }
+    .blog-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .blog-card h3 { margin-top: 0; }
+    .blog-card a { color: var(--accent-color); text-decoration: none; }
+    .blog-card a:hover { text-decoration: underline; }
+    .theme-toggle {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      background: none;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s;
+    }
+    .theme-toggle:hover { background: var(--section-bg-alt); }
+  </style>
+</head>
+<body data-theme="light">
+  <!-- Header -->
+  <header>
+    <h1>Webster Noble</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#blog">Blog</a>
+      <a href="#about">About</a>
+      <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+  </header>
 
-  return (
-    <div className="min-h-screen bg-white text-gray-900 flex flex-col font-sans">
-      {/* Header */}
-      <header className="flex justify-between items-center px-8 py-6 border-b border-gray-200">
-        <h1 className="text-2xl font-bold">Webster Noble</h1>
-        <nav className="space-x-6">
-          <a href="#home" className="hover:text-gray-500">Home</a>
-          <a href="#blog" className="hover:text-gray-500">Blog</a>
-          <a href="#about" className="hover:text-gray-500">About</a>
-        </nav>
-      </header>
+  <!-- Home Section -->
+  <section id="home">
+    <h2>Hi, I'm Webster Noble</h2>
+    <p>A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.</p>
+    <a href="#blog" class="button">Explore My Blog</a>
+  </section>
 
-      {/* Home Section */}
-      <section id="home" className="flex-1 flex flex-col justify-center items-center px-6 py-16 text-center">
-        <h2 className="text-4xl font-bold mb-4">Hi, I'm Webster Noble</h2>
-        <p className="max-w-2xl text-lg text-gray-600 mb-6">
-          A curious mind passionate about technology, creativity, and building meaningful projects. This site is my personal corner of the web where I share thoughts, ideas, and a bit about myself.
-        </p>
-        <a href="#blog" className="px-6 py-3 bg-blue-600 text-white rounded-2xl shadow hover:bg-blue-700 transition">
-          Explore My Blog
-        </a>
-      </section>
-
-      {/* Blog Section */}
-      <section id="blog" className="px-6 py-16 bg-gray-50">
-        <h2 className="text-3xl font-semibold text-center mb-10">Blog</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition p-6">
-              <h3 className="text-xl font-semibold mb-2">Blog Post {i}</h3>
-              <p className="text-gray-600 mb-4">
-                A short preview of the article goes here, giving readers a glimpse of what's inside.
-              </p>
-              <a href="#" className="text-blue-600 hover:underline">Read more →</a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="px-6 py-16 text-center">
-        <h2 className="text-3xl font-semibold mb-6">About Me</h2>
-        <p className="max-w-2xl mx-auto text-lg text-gray-600">
-          I'm Webster Noble, a lifelong learner who enjoys blending technology and creativity to bring ideas to life. Whether it's experimenting with new tools, writing about tech and design, or simply sharing stories, I'm always exploring ways to connect and grow.
-        </p>
-      </section>
-
-      {/* Footer */}
-      <footer className="px-6 py-8 border-t border-gray-200 text-center text-gray-500 text-sm">
-        © {year} Webster Noble. All rights reserved.
-      </footer>
+  <!-- Blog Section -->
+  <section id="blog" style="background:var(--section-bg-alt);">
+    <h2>Blog</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <h3>Blog Post 1</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+      <div class="blog-card">
+        <h3>Blog Post 2</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
+      <div class="blog-card">
+        <h3>Blog Post 3</h3>
+        <p>A short preview of the article goes here, giving readers a glimpse of what's inside.</p>
+        <a href="#">Read more →</a>
+      </div>
     </div>
-  );
-}
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm Webster Noble, a lifelong learner who enjoys blending technology and creativity to bring ideas to life. Whether it's experimenting with new tools, writing about tech and design, or simply sharing stories, I'm always exploring ways to connect and grow.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © <span id="year"></span> Webster Noble. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    function toggleTheme() {
+      const body = document.body;
+      body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
+    }
+  </script>
+</body>
+</html>
+
